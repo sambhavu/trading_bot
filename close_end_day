@@ -1,0 +1,97 @@
+#include <vector>
+#include <cmath>
+#include <iostream>
+#include <string>
+using namespace std; 
+
+const double prices[10] = { 
+    
+    101,
+    104,
+    103,
+    107,
+    104,
+    101,
+    109,
+    105,
+    104,
+    101};
+
+
+class trading {
+    public: 
+    
+    double position_value; 
+    double pnl;
+    
+    trading();
+    
+    void buy(int period);
+    void sell(int period);
+    
+    vector<double> buytimes; 
+    vector<double> position;
+
+};
+
+
+
+trading :: trading(){
+}
+    
+    
+    
+    
+
+void trading :: buy(int period){
+    
+ position_value = prices[period];
+ 
+ buytimes.push_back(period);
+ 
+ position.push_back(position_value);
+ 
+}
+
+
+
+
+
+
+void trading :: sell(int period){
+
+    int t;
+    
+    for(int i = 0; i<9; i++){
+        double change = 0; 
+        t = buytimes[i];
+        
+        change = prices[period] - prices[t];
+        cout<<change<<"\n";
+        t++;
+        
+        
+    }
+}
+
+
+
+
+
+
+
+
+int main()
+{
+    int t = 0;
+    
+    trading bot;   
+    for(int i = 0; i<9; i++){
+        bot.buy(t);
+        t++;
+    }
+    bot.sell(9);
+    
+    //cout<<bot.pnl;
+    return 0;
+}
