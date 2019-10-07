@@ -1,0 +1,76 @@
+#include <vector>
+#include <cmath>
+#include <iostream>
+#include <string>
+using namespace std; 
+
+const double prices[10] = { 
+    
+    101,
+    104,
+    103,
+    107,
+    104,
+    101,
+    109,
+    105,
+    104,
+    101};
+
+
+class trading {
+    public: 
+    
+    double position_value; 
+    
+    trading();
+    
+    int today=7;
+    
+    void buy(int period);
+    
+    double sell(int period);
+    
+    vector<double> buytimes; 
+    vector<double> position;
+
+};
+
+
+
+trading :: trading(){
+}
+    
+    
+    
+    
+
+void trading :: buy(int period){
+ position_value = prices[period];
+ buytimes.push_back(period);
+ position.push_back(position_value);
+}
+
+
+
+
+
+
+double trading :: sell(int period){     //send period of the position which you want closed @ current price
+    double change = 0; 
+    change = prices[today] - prices[period];
+    return change;
+}
+
+
+
+int main()
+{
+    trading bot;
+    double pnl;
+    bot.buy(2);
+    pnl = bot.sell(2);
+    
+    cout<<pnl;
+    return 0;
+}
